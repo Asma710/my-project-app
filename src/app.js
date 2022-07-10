@@ -45,7 +45,8 @@ function elementTemperature(response) {
   let sky = document.querySelector("#skyId");
   let humidity = document.querySelector("#humId");
   let visiblity = document.querySelector("#visiblyId");
-  h2.innerHTML = Math.round(response.data.main.temp);
+  celeciusTemperature = response.data.main.temp;
+  h2.innerHTML = Math.round(celeciusTemperature);
   let elementSky = `${response.data.weather[0].main}`;
   let elementHumidity = `${response.data.main.humidity}`;
   let visibility = `${response.data.visibility}`;
@@ -85,6 +86,31 @@ function currentPosition(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
 }
+function displayFaranhaitTemperature(event) {
+  event.preventDefault();
+  celsusitLink.classList.remove("active");
+  faranhaitLink.classList.add("active");
+  let tempElement = document.querySelector("#temp");
+  let faranheitTemp = (celeciusTemperature * 9) / 5 + 32;
+  tempElement.innerHTML = Math.round(faranheitTemp);
+}
+function displaycelsiusTemperature(event) {
+  event.preventDefault();
+  celsusitLink.classList.add("active");
+  faranhaitLink.classList.remove("active");
+  let tempElement = document.querySelector("#temp");
+  tempElement.innerHTML = Math.round(celeciusTemperature);
+}
+
+let celeciusTemperature = null;
+
 let clickbutton = document.querySelector("#currentId");
 clickbutton.addEventListener("click", currentPosition);
+
+let faranhaitLink = document.querySelector("#faranhait-link");
+faranhaitLink.addEventListener("click", displayFaranhaitTemperature);
+
+let celsusitLink = document.querySelector("#celsius-link");
+celsusitLink.addEventListener("click", displaycelsiusTemperature);
+
 showCity("Madrid");

@@ -5,7 +5,6 @@ body {
   background: antiquewhite;
 }
 h1,
-h2,
 h3 {
   font-family: "Roboto", sans-serif;
   width: 200px;
@@ -16,10 +15,7 @@ h1 {
   font-size: 70px;
   color: #6c63ff;
 }
-h2 {
-  font-size: 60px;
-  color: #9d606a;
-}
+
 h3 {
   color: #cccccc;
   font-size: 20px;
@@ -131,6 +127,28 @@ form {
   font-weight: 300;
   font-size: 20px;
 }
-.link {
+a {
   text-decoration: none;
+}
+
+.active {
+  cursor: default;
+  color: #2f2e41;
+}
+.active:hover {
+  color: #2f2e41;
+}
+
+.unitesTemp {
+  position: relative;
+  top: -30px;
+  font-size: 16px;
+}
+.temperature {
+  font-size: 60px;
+  font-weight: 500;
+  color: #9d606a;
+  font-family: "Roboto", sans-serif;
+  width: 200px;
+  line-height: 1.5;
 }
