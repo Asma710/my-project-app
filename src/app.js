@@ -40,7 +40,8 @@ let now = new Date();
 time.innerHTML = formatDate(now);
 
 function elementTemperature(response) {
-  console.log(response.data);
+  console.log(response);
+  console.log(response.data.main.temp);
   let h2 = document.querySelector("#temp");
   let sky = document.querySelector("#skyId");
   let humidity = document.querySelector("#humId");
@@ -60,7 +61,7 @@ function elementTemperature(response) {
 function showCity(city) {
   let apiKey = "1916e467d6475f3e271325f70b379c90";
   let unite = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&${unite}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(elementTemperature);
 }
 function search(event) {
@@ -90,9 +91,9 @@ function displayFaranhaitTemperature(event) {
   event.preventDefault();
   celsusitLink.classList.remove("active");
   faranhaitLink.classList.add("active");
-  let tempElement = document.querySelector("#temp");
-  let faranheitTemp = (celeciusTemperature * 9) / 5 + 32;
-  tempElement.innerHTML = Math.round(faranheitTemp);
+  let temp = document.querySelector("#temp");
+  let faranhaitTemp = (celeciusTemperature * 9) / 5 + 32;
+  temp.innerHTML = Math.round(faranhaitTemp);
 }
 function displaycelsiusTemperature(event) {
   event.preventDefault();
