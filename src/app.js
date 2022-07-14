@@ -39,6 +39,36 @@ let time = document.querySelector("#timeId");
 let now = new Date();
 time.innerHTML = formatDate(now);
 
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+  let forcastHTML = ` <div class="days" id="forcast">`;
+  let days = ["Tue", "Fri", "Sat", "San"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      ` 
+        <div class="week Sun">
+          <div class="weather-forcast-date">${day}</div>
+          
+           <br /><img src=" http://openweathermap.org/img/wn/10d@2x.png" width="66px";
+           height="55px"/></i><br />
+           <div class="weather-forcast-temperatures">
+            <span class="weather-forcast-temperatures-max">
+            15°
+            </span> 
+           <span class="weather-forcast-temperature-min">
+           18°
+           </span>
+          </div>
+        </div>
+        `;
+  });
+
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+  console.log(forcastHTML);
+}
+
 function elementTemperature(response) {
   console.log(response);
   console.log(response.data.main.temp);
@@ -104,6 +134,7 @@ function displaycelsiusTemperature(event) {
 }
 
 let celeciusTemperature = null;
+displayForcast();
 
 let clickbutton = document.querySelector("#currentId");
 clickbutton.addEventListener("click", currentPosition);
