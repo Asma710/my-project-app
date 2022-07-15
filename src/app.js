@@ -39,25 +39,43 @@ let time = document.querySelector("#timeId");
 let now = new Date();
 time.innerHTML = formatDate(now);
 
-function displayForcast() {
+function displayForcast(response) {
+  console.log(response.data.daily);
+  let dayElement = response.data.daily;
+
   let forcastElement = document.querySelector("#forcast");
   let forcastHTML = ` <div class="days" id="forcast">`;
-  let days = ["Tue", "Fri", "Sat", "San"];
-  days.forEach(function (day) {
+  //let days = [dayElementone, dayElementwo, dayElementtree, dayElementfour];
+  let allDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let tempMin = response.data.daily[0].temp.min;
+
+  let tempMax = response.data.daily[0].temp.max;
+  let icon = response.data.daily[0].weather[0].icon;
+  console.log(icon);
+  console.log(tempMin);
+  dayElement.forEach(function (forcastDay) {
     forcastHTML =
       forcastHTML +
       ` 
         <div class="week Sun">
-          <div class="weather-forcast-date">${day}</div>
+          <div class="weather-forcast-date">${forcastDay.dt}</div>
           
            <br /><img src=" http://openweathermap.org/img/wn/10d@2x.png" width="66px";
            height="55px"/></i><br />
            <div class="weather-forcast-temperatures">
             <span class="weather-forcast-temperatures-max">
-            15°
+            ${forcastDay[0].temp.max}°
             </span> 
            <span class="weather-forcast-temperature-min">
-           18°
+           ${forcastDay[0].temp.min}°
            </span>
           </div>
         </div>
@@ -67,6 +85,13 @@ function displayForcast() {
   forcastHTML = forcastHTML + `</div>`;
   forcastElement.innerHTML = forcastHTML;
   console.log(forcastHTML);
+}
+function getForecast(coords) {
+  console.log(coords.lon);
+  let apiKey = "1916e467d6475f3e271325f70b379c90";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForcast);
+  console.log(apiUrl);
 }
 
 function elementTemperature(response) {
@@ -87,6 +112,7 @@ function elementTemperature(response) {
   humidity.innerHTML = elementHumidity;
   visiblity.innerHTML = visibility;
   newCity.innerHTML = city;
+  getForecast(response.data.coord);
 }
 function showCity(city) {
   let apiKey = "1916e467d6475f3e271325f70b379c90";
@@ -109,7 +135,7 @@ function showPosition(position) {
   let unite = "metric";
   let apiKey = "1916e467d6475f3e271325f70b379c90";
   let apiEndpint = "https://api.openweathermap.org/data/2.5/weather";
-  let apiUrl = `${apiEndpint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${unite} `;
+  let apiUrl = `${apiEndpint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(elementTemperature);
 }
@@ -134,7 +160,6 @@ function displaycelsiusTemperature(event) {
 }
 
 let celeciusTemperature = null;
-displayForcast();
 
 let clickbutton = document.querySelector("#currentId");
 clickbutton.addEventListener("click", currentPosition);
