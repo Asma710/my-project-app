@@ -1,4 +1,5 @@
 function formatDate(date) {
+  console.log(date);
   let hours = date.getHours();
   if (hours < 10) {
     hours = ` 0${hours}`;
@@ -39,43 +40,40 @@ let time = document.querySelector("#timeId");
 let now = new Date();
 time.innerHTML = formatDate(now);
 
+function displayDate(timeDate) {
+  let now = new Date(timeDate * 1000);
+  let day = now.getDay();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function displayForcast(response) {
   console.log(response.data.daily);
   let dayElement = response.data.daily;
 
   let forcastElement = document.querySelector("#forcast");
   let forcastHTML = ` <div class="days" id="forcast">`;
-  //let days = [dayElementone, dayElementwo, dayElementtree, dayElementfour];
-  let allDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let tempMin = response.data.daily[0].temp.min;
 
-  let tempMax = response.data.daily[0].temp.max;
-  let icon = response.data.daily[0].weather[0].icon;
-  console.log(icon);
-  console.log(tempMin);
-  dayElement.forEach(function (forcastDay) {
-    forcastHTML =
-      forcastHTML +
-      ` 
+  dayElement.forEach(function (forcastDay, index) {
+    if (index < 6)
+      forcastHTML =
+        forcastHTML +
+        ` 
         <div class="week Sun">
-          <div class="weather-forcast-date">${forcastDay.dt}</div>
+          <div class="weather-forcast-date">${displayDate(forcastDay.dt)}</div>
           
-           <br /><img src=" http://openweathermap.org/img/wn/10d@2x.png" width="66px";
+          
+           <br /><img src=" http://openweathermap.org/img/wn/${
+             forcastDay.weather[0].icon
+           }@2x.png" width="66px";
            height="55px"/></i><br />
            <div class="weather-forcast-temperatures">
             <span class="weather-forcast-temperatures-max">
-            ${forcastDay[0].temp.max}°
+            ${Math.round(forcastDay.temp.min)}°
             </span> 
            <span class="weather-forcast-temperature-min">
-           ${forcastDay[0].temp.min}°
+           ${Math.round(forcastDay.temp.max)}°
            </span>
           </div>
         </div>
@@ -108,10 +106,12 @@ function elementTemperature(response) {
   let visibility = `${response.data.visibility}`;
   let newCity = document.querySelector("h1");
   let city = `${response.data.name}`;
+  let dateElement = document.querySelector("#day");
   sky.innerHTML = elementSky;
   humidity.innerHTML = elementHumidity;
   visiblity.innerHTML = visibility;
   newCity.innerHTML = city;
+
   getForecast(response.data.coord);
 }
 function showCity(city) {
