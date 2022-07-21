@@ -2,7 +2,7 @@ body {
   font-family: "PT Mono", monospace;
   width: 100%;
   margin-bottom: 15px;
-  background-image: url("/sky2.jpg");
+  background-image: url("/images/sky2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.9;
