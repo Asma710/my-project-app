@@ -56,7 +56,7 @@ function displayForcast(response) {
   let forcastHTML = ` <div class="days" id="forcast">`;
 
   dayElement.forEach(function (forcastDay, index) {
-    if (index < 6)
+    if (index < 5)
       forcastHTML =
         forcastHTML +
         ` 
@@ -106,11 +106,15 @@ function elementTemperature(response) {
   let visibility = `${response.data.visibility}`;
   let newCity = document.querySelector("h1");
   let city = `${response.data.name}`;
-  let dateElement = document.querySelector("#day");
+  let iconElement = document.querySelector("#icon");
   sky.innerHTML = elementSky;
   humidity.innerHTML = elementHumidity;
   visiblity.innerHTML = visibility;
   newCity.innerHTML = city;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 
   getForecast(response.data.coord);
 }

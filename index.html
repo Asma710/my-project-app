@@ -26,67 +26,72 @@
   </head>
   <body>
     <div class="container">
-      <form id="formId">
-        <input
-          id="inputId"
-          type="text"
-          placeholder="Enter Your City"
-          class="city"
+      <div class="weatherToday">
+        <form id="formId">
+          <input
+            id="inputId"
+            type="text"
+            placeholder="Enter Your City"
+            class="city"
+          />
+
+          <input it="subId" type="submit" value="Search" class="button-city" />
+          <input
+            id="currentId"
+            type="submit"
+            value="current"
+            class="button-current"
+          />
+        </form>
+        <h1 id="city"></h1>
+        <div class="time" id="timeId">
+          <div class="newTime"></div>
+          <div class="hour"></div>
+        </div>
+
+        <div>
+          <strong id="temp" class="temperature"></strong>
+          <span class="unitesTemp"
+            ><a href="#" id="celsius-link" class="active">°C</a> |
+            <a href="#" id="faranhait-link">°F</a></span
+          >
+        </div>
+        <img
+          src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+          alt="sunny"
+          class="float-left"
+          id="icon"
         />
-
-        <input it="subId" type="submit" value="Search" class="button-city" />
-        <input
-          id="currentId"
-          type="submit"
-          value="current"
-          class="button-current"
-        />
-      </form>
-      <h1 id="city"></h1>
-      <div class="time" id="timeId">
-        <div class="newTime"></div>
-        <div class="hour"></div>
+        <div class="row">
+          <div class="col-4 fs-5">
+            Sky
+            <div id="skyId" class="rain"><span id="skyId"></span>%</div>
+          </div>
+          <div class="col-4 fs-5">
+            Humidity
+            <div class="rain"><span id="humId"></span>%</div>
+          </div>
+          <div class="col-4 fs-5">
+            Visibility
+            <div class="rain"><span id="visiblyId"></span>Km/h</div>
+          </div>
+        </div>
       </div>
-
-      <div>
-        <strong id="temp" class="temperature"></strong>
-        <span class="unitesTemp"
-          ><a href="#" id="celsius-link" class="active">°C</a> |
-          <a href="#" id="faranhait-link">°F</a></span
-        >
-      </div>
-
-      <h3>
-        Sky
-        <div id="skyId" class="rain"><span id="skyId">95</span>%</div>
-      </h3>
-      <h3>
-        Humidity
-        <div class="rain"><span id="humId">80</span>%</div>
-      </h3>
-      <h3>
-        Visibility
-        <div class="rain"><span id="visiblyId">12</span>Km/h</div>
-      </h3>
-      <p>
-        <img  class="image"src="images/rain photo.png" alt="rain" />
-      </p>
       <div class="days" id="forcast">
         <div class="week Sun">
           <div class="weather-forcast-date" id="day">Sun</div>
-          
-           <br /><img src=" http://openweathermap.org/img/wn/10d@2x.png" width="66px";
-           height="55px"/></i><br />
-           <div class="weather-forcast-temperatures">
-            <span class="weather-forcast-temperatures-max">
-            15
-            </span> 
-           <span class="weather-forcast-temperature-min">
-           18
-           </span>
+
+          <br /><img
+            src=" http://openweathermap.org/img/wn/10d@2x.png"
+            width="66px"
+            ;
+            height="55px"
+          /><br />
+          <div class="weather-forcast-temperatures">
+            <span class="weather-forcast-temperatures-max"> 15 </span>
+            <span class="weather-forcast-temperature-min"> 18 </span>
           </div>
         </div>
-        
       </div>
     </div>
     <div class="open-sorce">
@@ -97,4 +102,4 @@
     </div>
     <script src="src/App.js"></script>
   </body>
-  </html>
+</html>
